@@ -22,14 +22,28 @@
 #   - list.append()
 # ============================================================
 
-
-
 tasks = []
 
-for _ in range(3):
-    task = input("Enter a task: ")
-    tasks.append(task)
+while True:
+    print("\n1.Add Task")
+    print("2.View Tasks")
+    print("3. Exit")
 
-print("Your tasks:")
-for item in tasks:
-    print("-", item)
+    choice = input("Enter your choices: ")
+
+    if choice =="1":
+        task=input("Enter a task:")
+        tasks.append(task)
+    
+    elif choice=="2":
+        print("\n Your tasks:")
+        for item in tasks:
+            print("-",item)
+    
+    elif choice == "3":
+        print("Exiting program...")
+        break
+
+    else:
+        print("Invalid choice.Try again")
+        
