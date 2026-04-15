@@ -23,3 +23,9 @@ To build strong Python fundamentals and gradually extend this project into:
 ## How to Run
 ```bash
 python tracker.py
+
+## 📸 Demo
+
+Command-line task tracker in action:
+
+![Task Tracker Demo](assets/demo.png)
