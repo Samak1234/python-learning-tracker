@@ -41,7 +41,10 @@ Concepts used:
 # List to store all tasks entered by the user
 tasks = []
 # Infinite loop to keep the program running until user exits
-while True:
+
+def add_task():
+
+ while True:
 
     #display menu options to the user
     print("\n------ TASK MANAGER ------")
@@ -77,3 +80,4 @@ while True:
     else:
         print("Invalid choice. Try again.")
         
+add_task()
