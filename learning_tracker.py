@@ -22,28 +22,58 @@
 #   - list.append()
 # ============================================================
 
+"""
+Simple CLI-based Task Manager.
+
+Features:
+- Add tasks
+- View tasks with numbering
+- Exit program
+
+Concepts used:
+- Lists
+- Loops
+- Conditionals
+- User input handling
+"""
+
+
+# List to store all tasks entered by the user
 tasks = []
-
+# Infinite loop to keep the program running until user exits
 while True:
-    print("\n1.Add Task")
-    print("2.View Tasks")
+
+    #display menu options to the user
+    print("\n------ TASK MANAGER ------")
+    print("1. Add Task")
+    print("2. View Tasks")
     print("3. Exit")
+    #Take user input(always come as string)
+    choice = input("Enter your choice: ")
 
-    choice = input("Enter your choices: ")
+    #option 1: Add a new task
+    if choice == "1":
+        task = input("Enter a task: ")
+        tasks.append(task)#add task to the list 
 
-    if choice =="1":
-        task=input("Enter a task:")
-        tasks.append(task)
     
-    elif choice=="2":
-        print("\n Your tasks:")
-        for item in tasks:
-            print("-",item)
+    #option 2:View all tasks
+    elif choice == "2":
+        print("\nYour tasks:")
+        #check if task list is empty 
+        if len(tasks) == 0:
+            print("No tasks yet!")
+        else:
+            #loop through tasks using index to display numbering
+            for i in range(len(tasks)):
+                print(f"{i + 1}. {tasks[i]}")#Print task number (starting from 1) and the task from the list
     
+    # Option 3: Exit program
     elif choice == "3":
         print("Exiting program...")
-        break
+        break # stops the infinite loop and ends program
 
+    # Handle invalid input
     else:
-        print("Invalid choice.Try again")
+        print("Invalid choice. Try again.")
         
