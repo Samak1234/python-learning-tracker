@@ -2,7 +2,7 @@
 # Project  : Python Learning Tracker (CLI)
 # File     : learning_tracker.py
 # Author   : Samaksh
-# Version  : 1.1 - Day 2 (Functions + Delete)
+# Version  : 1.2 - Day 3 (Modular Functions + Delete Feature)
 # ============================================================
 # Description:
 #   A command-line based personal learning tracker built in Python.
@@ -11,19 +11,20 @@
 #   OOP, file handling, SQLite, REST APIs, and ML integration.
 #
 # Current Version Features:
-#   - Accept multiple learning tasks from the user via CLI
-#   - Store tasks in a Python list (in-memory)
-#   - Display all entered tasks in a formatted list
-#   - Delete a task by number
-#   - Organized into functions for clean structure
+#   - Add new tasks via CLI
+#   - View tasks with numbering
+#   - Delete tasks by selecting index
+#   - Modular structure using functions
+#   - Centralized program flow using main() entry point
 #
 # Concepts Used:
 #   - Variables, Strings, Lists
-#   - for loop, range()
-#   - input(), print()
-#   - list.append(), list.pop()
+#   - Loops (for, while)
+#   - Conditionals (if/elif/else)
 #   - Functions (def)
-#   - Conditionals
+#   - List methods (append, pop)
+#   - User input handling
+#   - Basic program structuring (main function, entry point)
 # ============================================================
 
 """
