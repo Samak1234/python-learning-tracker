@@ -35,4 +35,4 @@ Command-line task tracker in action:
 
 Demonstration of deleting a task using index:
 
-![Delete Task Demo](assets/Demo2.png)
+![Delete Task Demo](assets/delete-task-demo.png)
