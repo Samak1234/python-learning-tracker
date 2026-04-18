@@ -29,3 +29,10 @@ python tracker.py
 Command-line task tracker in action:
 
 ![Task Tracker Demo](assets/demo.png)
+---
+
+## 🗑️ Delete Task Feature (Day 3)
+
+Demonstration of deleting a task using index:
+
+![Delete Task Demo](assets/Demo2.png)
