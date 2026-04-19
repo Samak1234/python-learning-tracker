@@ -43,10 +43,26 @@ Concepts used:
 - Functions
 - User input handling
 """
+import json
 
 
-# List to store all tasks entered by the user
-tasks = []
+def load_tasks():
+    """Load tasks from file. Return empty list if file doesn't exist."""
+    try:
+        with open("tasks.json", "r") as file:
+            return json.load(file)
+    except:
+        return []
+
+
+def save_tasks():
+    """Save current tasks to file so data persists after program ends."""
+    with open("tasks.json", "w") as file:
+        json.dump(tasks, file)
+
+
+# Load tasks from file (or start with empty list if none exist)
+tasks = load_tasks()
 
 
 def add_task():
