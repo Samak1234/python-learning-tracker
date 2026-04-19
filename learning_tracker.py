@@ -61,7 +61,8 @@ def load_tasks():
     """Load tasks from file. Return empty list if file doesn't exist."""
     try:
         with open("tasks.json", "r") as file:
-            return json.load(file)
+            return json.load(file) # Read JSON file
+# Converts stored data → Python list
     except:
         return []
 
@@ -69,7 +70,8 @@ def load_tasks():
 def save_tasks():
     """Save current tasks to file so data persists after program ends."""
     with open("tasks.json", "w") as file:
-        json.dump(tasks, file)
+        json.dump(tasks, file)# Write data to file
+# Converts Python list → JSON format for storage
 
 # Load tasks from file (or start with empty list if none exist)
 tasks = load_tasks()
@@ -96,13 +98,20 @@ def view_tasks():
 
 def delete_task():
     """Show all tasks and allow user to delete one by number."""
-    view_tasks()  # Show current tasks before asking which to delete
+    
 
     if len(tasks) == 0:
         print("No tasks to delete!")
         return  # Nothing to delete, exit function early
 
-    index = int(input("Enter task number to delete: ")) - 1  # Convert to 0-based index
+    view_tasks()  # Show current tasks before asking which to delete
+
+    try:
+        index = int(input("Enter task number to delete: ")) - 1  # Convert to 0-based index
+    except:
+        print("please enter a valid number!")
+        return 
+
     if 0 <= index < len(tasks):
         removed = tasks.pop(index)  # Remove task at given index and store it
         print("Removed:", removed)
@@ -125,7 +134,10 @@ def main():
 
         # Take user input (always comes as string)
         choice = input("Enter your choice: ")
-
+        
+        if choice not in ["1", "2", "3", "4"]:
+            print("Invalid choice. Try again.")
+            continue
         # Option 1: Add a new task
         if choice == "1":
             add_task()
