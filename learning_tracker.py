@@ -2,7 +2,7 @@
 # Project  : Python Learning Tracker (CLI)
 # File     : learning_tracker.py
 # Author   : Samaksh
-# Version  : 1.2 - Day 3 (Modular Functions + Delete Feature)
+# Version  : 1.3 - Day 4 (JSON File Persistence)
 # ============================================================
 # Description:
 #   A command-line based personal learning tracker built in Python.
@@ -14,6 +14,8 @@
 #   - Add new tasks via CLI
 #   - View tasks with numbering
 #   - Delete tasks by selecting index
+#   - Persist tasks using a JSON file
+#   - Load saved tasks automatically when the program starts
 #   - Modular structure using functions
 #   - Centralized program flow using main() entry point
 #
@@ -22,9 +24,12 @@
 #   - Loops (for, while)
 #   - Conditionals (if/elif/else)
 #   - Functions (def)
+#   - File handling
+#   - JSON serialization/deserialization
 #   - List methods (append, pop)
 #   - User input handling
 #   - Basic program structuring (main function, entry point)
+#   - Exception handling with try/except
 # ============================================================
 
 """
@@ -34,6 +39,8 @@ Features:
 - Add tasks
 - View tasks with numbering
 - Delete a task by number
+- Save tasks permanently using JSON
+- Load saved tasks automatically on startup
 - Exit program
 
 Concepts used:
@@ -41,7 +48,10 @@ Concepts used:
 - Loops
 - Conditionals
 - Functions
+- File handling
+- JSON
 - User input handling
+- Exception handling
 """
 import json
 
