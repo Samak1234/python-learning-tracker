@@ -53,8 +53,9 @@ Concepts used:
 - User input handling
 - Exception handling
 """
-import json
 
+# Helps convert tasks between Python list ↔ file format (JSON)
+import json
 
 def load_tasks():
     """Load tasks from file. Return empty list if file doesn't exist."""
@@ -70,7 +71,6 @@ def save_tasks():
     with open("tasks.json", "w") as file:
         json.dump(tasks, file)
 
-
 # Load tasks from file (or start with empty list if none exist)
 tasks = load_tasks()
 
@@ -79,6 +79,7 @@ def add_task():
     """Prompt the user to enter a task and add it to the list."""
     task = input("Enter a task: ")
     tasks.append(task)  # Add task to the list
+    save_tasks()
     print("Task added successfully!")
 
 
@@ -98,6 +99,7 @@ def delete_task():
     view_tasks()  # Show current tasks before asking which to delete
 
     if len(tasks) == 0:
+        print("No tasks to delete!")
         return  # Nothing to delete, exit function early
 
     index = int(input("Enter task number to delete: ")) - 1  # Convert to 0-based index
