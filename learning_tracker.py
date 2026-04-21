@@ -116,7 +116,7 @@ def delete_task():
         removed = tasks.pop(index)  # Remove task at given index and store it
         print("Removed:", removed)
     else:
-        print("Invalid number")  # User entered a number outside the valid range
+        print(f"Enter a number between 1 and {len(tasks)}")  # User entered a number outside the valid range
 
 
 def main():
