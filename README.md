@@ -36,3 +36,12 @@ Command-line task tracker in action:
 Demonstration of deleting a task using index:
 
 ![Delete Task Demo](assets/delete-task-demo.png)
+
+## Input Validation & Error Handling (Day 5)
+
+Handles invalid inputs gracefully:
+- Non-numeric input
+- Out-of-range task numbers
+- Invalid menu choices
+
+![Error Handling Demo](assets/error-handling-demo.png)
