@@ -53,16 +53,27 @@ Concepts used:
 - User input handling
 - Exception handling
 """
-
+from datetime import datetime
 # Helps convert tasks between Python list ↔ file format (JSON)
 import json
 
 def load_tasks():
-    """Load tasks from file. Return empty list if file doesn't exist."""
     try:
         with open("tasks.json", "r") as file:
-            return json.load(file) # Read JSON file
-# Converts stored data → Python list
+            data = json.load(file)
+
+            # convert old string format → new dict format
+            if len(data) > 0 and isinstance(data[0], str):
+                new_data = []
+                for item in data:
+                    new_data.append({
+                        "title": item,
+                        "done": False,
+                        "created_at": "unknown"
+                    })
+                return new_data
+
+            return data
     except:
         return []
 
@@ -80,7 +91,12 @@ tasks = load_tasks()
 def add_task():
     """Prompt the user to enter a task and add it to the list."""
     task = input("Enter a task: ")
-    tasks.append(task)  # Add task to the list
+    task_obj = {
+    "title": task,
+    "done": False,
+    "created_at": datetime.now().strftime("%Y-%m-%d %H:%M")
+    }
+    tasks.append(task_obj)
     save_tasks()
     print("Task added successfully!")
 
@@ -93,7 +109,9 @@ def view_tasks():
         print("\nYour tasks:")
         # Loop through tasks using index to display numbering
         for i in range(len(tasks)):
-            print(f"{i + 1}. {tasks[i]}")  # Print task number (starting from 1) and the task
+            task = tasks[i]
+    status = "✔" if task["done"] else "❌"
+    print(f"{i + 1}. {task['title']} [{status}] ({task['created_at']})")
 
 
 def delete_task():
@@ -114,7 +132,7 @@ def delete_task():
 
     if 0 <= index < len(tasks):
         removed = tasks.pop(index)  # Remove task at given index and store it
-        print("Removed:", removed)
+        print("Removed:", removed["title"])
     else:
         print(f"Enter a number between 1 and {len(tasks)}")  # User entered a number outside the valid range
 
