@@ -2,55 +2,51 @@
 # Project  : Python Learning Tracker (CLI)
 # File     : learning_tracker.py
 # Author   : Samaksh
-# Version  : 1.3 - Day 4 (JSON File Persistence)
+# Version  : 1.4 - Day 6 (Task Metadata + Improved Structure)
 # ============================================================
 # Description:
 #   A command-line based personal learning tracker built in Python.
-#   This project is being developed incrementally over 4 weeks,
-#   starting from core Python fundamentals and scaling up to
-#   OOP, file handling, SQLite, REST APIs, and ML integration.
-#
+#   The project is evolving step-by-step from basic Python concepts
+#   to a more structured and real-world application.
+
 # Current Version Features:
-#   - Add new tasks via CLI
-#   - View tasks with numbering
+#   - Add tasks with metadata (title, status, created time)
+#   - View tasks with numbering, status, and timestamp
 #   - Delete tasks by selecting index
 #   - Persist tasks using a JSON file
-#   - Load saved tasks automatically when the program starts
+#   - Load saved tasks automatically on startup
+#   - Backward compatibility for old task format (string → object)
 #   - Modular structure using functions
-#   - Centralized program flow using main() entry point
-#
+#   - Centralized program flow using main()
+
 # Concepts Used:
-#   - Variables, Strings, Lists
+#   - Lists of dictionaries (structured data)
 #   - Loops (for, while)
 #   - Conditionals (if/elif/else)
 #   - Functions (def)
 #   - File handling
 #   - JSON serialization/deserialization
-#   - List methods (append, pop)
-#   - User input handling
-#   - Basic program structuring (main function, entry point)
-#   - Exception handling with try/except
+#   - Date & time handling (datetime)
+#   - Exception handling (try/except)
 # ============================================================
 
 """
-Simple CLI-based Task Manager.
+CLI-based Task Manager with structured task storage.
 
 Features:
-- Add tasks
-- View tasks with numbering
-- Delete a task by number
-- Save tasks permanently using JSON
-- Load saved tasks automatically on startup
-- Exit program
+- Add tasks with status and timestamp
+- View tasks with numbering and status (✔ / ❌)
+- Delete tasks by number
+- Save tasks using JSON (persistent storage)
+- Load tasks automatically on startup
+- Handles old data format safely
 
 Concepts used:
-- Lists
-- Loops
-- Conditionals
+- Lists & Dictionaries
+- Loops & Conditionals
 - Functions
-- File handling
-- JSON
-- User input handling
+- File handling (JSON)
+- Datetime module
 - Exception handling
 """
 from datetime import datetime
@@ -62,7 +58,7 @@ def load_tasks():
         with open("tasks.json", "r") as file:
             data = json.load(file)
 
-            # convert old string format → new dict format
+            # If old format (list of strings), convert to new structured format
             if len(data) > 0 and isinstance(data[0], str):
                 new_data = []
                 for item in data:
@@ -75,6 +71,7 @@ def load_tasks():
 
             return data
     except:
+        # If file doesn't exist or error occurs, return empty list
         return []
 
 
@@ -91,10 +88,11 @@ tasks = load_tasks()
 def add_task():
     """Prompt the user to enter a task and add it to the list."""
     task = input("Enter a task: ")
+    # Create structured task object instead of plain string
     task_obj = {
     "title": task,
-    "done": False,
-    "created_at": datetime.now().strftime("%Y-%m-%d %H:%M")
+    "done": False, # Task is initially not completed
+    "created_at": datetime.now().strftime("%Y-%m-%d %H:%M") # Store timestamp
     }
     tasks.append(task_obj)
     save_tasks()
@@ -131,6 +129,7 @@ def delete_task():
         return 
 
     if 0 <= index < len(tasks):
+        # Remove task using index and show only the title
         removed = tasks.pop(index)  # Remove task at given index and store it
         print("Removed:", removed["title"])
     else:
