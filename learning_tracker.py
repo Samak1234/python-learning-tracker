@@ -49,7 +49,8 @@ Concepts used:
 - Datetime module
 - Exception handling
 """
-from datetime import datetime
+
+from datetime import datetime # Import datetime class to handle and format task creation timestamps
 # Helps convert tasks between Python list ↔ file format (JSON)
 import json
 
