@@ -2,7 +2,7 @@
 # Project  : Python Learning Tracker (CLI)
 # File     : learning_tracker.py
 # Author   : Samaksh
-# Version  : 1.4 - Day 6 (Task Metadata + Improved Structure)
+# Version  : 1.4 - Day 6 (Task Metadata + Mark Done + Validation)
 # ============================================================
 # Description:
 #   A command-line based personal learning tracker built in Python.
@@ -18,6 +18,10 @@
 #   - Backward compatibility for old task format (string → object)
 #   - Modular structure using functions
 #   - Centralized program flow using main()
+#   - Mark tasks as done (✔ / ❌ status display)
+#   - Input validation with specific ValueError handling
+#   - Fixed view_tasks indentation bug
+#   - JSON saved with indent=4 for readability
 
 # Concepts Used:
 #   - Lists of dictionaries (structured data)
@@ -71,7 +75,7 @@ def load_tasks():
                 return new_data
 
             return data
-    except:
+    except (FileNotFoundError, json.JSONDecodeError):
         # If file doesn't exist or error occurs, return empty list
         return []
 
@@ -79,8 +83,7 @@ def load_tasks():
 def save_tasks():
     """Save current tasks to file so data persists after program ends."""
     with open("tasks.json", "w") as file:
-        json.dump(tasks, file)# Write data to file
-# Converts Python list → JSON format for storage
+        json.dump(tasks,file, indent=4) # indent=4 makes the file neat and readable
 
 # Load tasks from file (or start with empty list if none exist)
 tasks = load_tasks()
@@ -109,8 +112,8 @@ def view_tasks():
         # Loop through tasks using index to display numbering
         for i in range(len(tasks)):
             task = tasks[i]
-    status = "✔" if task["done"] else "❌"
-    print(f"{i + 1}. {task['title']} [{status}] ({task['created_at']})")
+            status = "✔" if task["done"] else "❌"
+            print(f"{i + 1}. {task['title']} [{status}] ({task['created_at']})")
 
 
 def delete_task():
@@ -125,8 +128,8 @@ def delete_task():
 
     try:
         index = int(input("Enter task number to delete: ")) - 1  # Convert to 0-based index
-    except:
-        print("please enter a valid number!")
+    except ValueError:
+        print("Please enter a valid number!")
         return 
 
     if 0 <= index < len(tasks):
@@ -136,6 +139,25 @@ def delete_task():
     else:
         print(f"Enter a number between 1 and {len(tasks)}")  # User entered a number outside the valid range
 
+def mark_done():
+    """Let user mark a task as completed."""
+    view_tasks()
+
+    if len(tasks) == 0:
+        return
+
+    try:
+        index = int(input("Enter task number to mark done: ")) - 1
+    except ValueError:
+        print("Please enter a valid number!")
+        return
+
+    if 0 <= index < len(tasks):
+        tasks[index]["done"] = True   # flip done from False to True
+        save_tasks()
+        print(f"✔ '{tasks[index]['title']}' marked as done!")
+    else:
+        print(f"Enter a number between 1 and {len(tasks)}")
 
 def main():
     """Main loop that keeps the program running and handles menu navigation."""
@@ -148,12 +170,13 @@ def main():
         print("1. Add Task")
         print("2. View Tasks")
         print("3. Delete Task")
-        print("4. Exit")
+        print("4. Mark Task Done")
+        print("5. Exit")
 
         # Take user input (always comes as string)
         choice = input("Enter your choice: ")
         
-        if choice not in ["1", "2", "3", "4"]:
+        if choice not in ["1", "2", "3", "4","5"]:
             print("Invalid choice. Try again.")
             continue
         # Option 1: Add a new task
@@ -168,16 +191,13 @@ def main():
         elif choice == "3":
             delete_task()
 
-        # Option 4: Exit program
         elif choice == "4":
-            print("Exiting program...")
-            break  # Stops the infinite loop and ends the program
+            mark_done()
 
-        # Handle invalid input
-        else:
-            print("Invalid choice. Try again.")
-
-
+        elif choice == "5":
+            print("Exiting...")
+            break
+        
 # Entry point — only runs main() if this file is executed directly
 # (not when imported as a module into another file)
 if __name__ == "__main__":
