@@ -93,14 +93,35 @@ def add_task():
     """Prompt the user to enter a task and add it to the list."""
     task = input("Enter a task: ")
     # Create structured task object instead of plain string
+
+      # Ask user to select a priority level
+    print("Select priority:")
+    print("1. High")
+    print("2. Medium")
+    print("3. Low")
+    pick = input("Enter 1 / 2 / 3: ")
+
+    # Map input to priority label
+    if pick == "1":
+        priority = "High"
+    elif pick == "2":
+        priority = "Medium"
+    elif pick == "3":
+        priority = "Low"
+    else:
+        priority = "Medium"  # Default if invalid input
+    
+    # Create structured task object
     task_obj = {
-    "title": task,
-    "done": False, # Task is initially not completed
-    "created_at": datetime.now().strftime("%Y-%m-%d %H:%M") # Store timestamp
+        "title": task,
+        "done": False,
+        "created_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "priority": priority   # ← new field added
     }
+  
     tasks.append(task_obj)
     save_tasks()
-    print("Task added successfully!")
+    print(f"Task added with {priority} priority!")
 
 
 def view_tasks():
@@ -135,6 +156,7 @@ def delete_task():
     if 0 <= index < len(tasks):
         # Remove task using index and show only the title
         removed = tasks.pop(index)  # Remove task at given index and store it
+        save_tasks()
         print("Removed:", removed["title"])
     else:
         print(f"Enter a number between 1 and {len(tasks)}")  # User entered a number outside the valid range
