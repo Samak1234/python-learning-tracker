@@ -130,11 +130,18 @@ def view_tasks():
         print("No tasks yet!")
     else:
         print("\nYour tasks:")
+
+         # Map priority to emoji for visual display
+
+        priority_icon = {"High": "🔴", "Medium": "🟡", "Low": "🟢"}
         # Loop through tasks using index to display numbering
         for i in range(len(tasks)):
             task = tasks[i]
             status = "✔" if task["done"] else "❌"
-            print(f"{i + 1}. {task['title']} [{status}] ({task['created_at']})")
+
+             # .get() used here so old tasks without priority don't crash
+            icon = priority_icon.get(task.get("priority", "Unknown"), "⚪")
+            print(f"{i + 1}. {icon} {task['title']} [{status}] ({task['created_at']})")
 
 
 def delete_task():
