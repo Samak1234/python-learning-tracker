@@ -1,14 +1,24 @@
 # ============================================================
-# Project  : Python Learning Tracker (CLI)
+# Project  : CLI Task Manager
 # File     : learning_tracker.py
 # Author   : Samaksh
-# Version  : 1.4 - Day 6 (Task Metadata + Mark Done + Validation)
+# Version  : 1.5 - Day 7 (Priority Levels + Icon Display)
 # ============================================================
 # Description:
-#   A command-line based personal learning tracker built in Python.
-#   The project is evolving step-by-step from basic Python concepts
-#   to a more structured and real-world application.
-
+#   A command-line task manager built while learning Python.
+#   Grows incrementally — from basic lists to OOP, SQLite,
+#   Flask, and deployment.
+#
+# This project started as a 30-line script on Day 1.
+# Every day one new feature is added — documenting real
+# Python learning through actual working code.
+#
+# Roadmap:
+#   Week 1 → Core Python + JSON       (current)
+#   Week 2 → OOP + SQLite
+#   Week 3 → Flask Web App
+#   Week 4 → Deploy to production
+# ============================================================
 # Current Version Features:
 #   - Add tasks with metadata (title, status, created time)
 #   - View tasks with numbering, status, and timestamp
@@ -20,9 +30,10 @@
 #   - Centralized program flow using main()
 #   - Mark tasks as done (✔ / ❌ status display)
 #   - Input validation with specific ValueError handling
-#   - Fixed view_tasks indentation bug
 #   - JSON saved with indent=4 for readability
-
+#   - Priority levels (High / Medium / Low) with icon display
+#   - Priority stored in task object and shown when viewing
+# ============================================================
 # Concepts Used:
 #   - Lists of dictionaries (structured data)
 #   - Loops (for, while)
@@ -32,15 +43,18 @@
 #   - JSON serialization/deserialization
 #   - Date & time handling (datetime)
 #   - Exception handling (try/except)
+#   - dict.get() for safe key access
+#   - Input mapping (user choice → meaningful value)
 # ============================================================
 
 """
-CLI-based Task Manager with structured task storage.
+CLI-based Task Manager — built incrementally while learning Python.
 
 Features:
-- Add tasks with status and timestamp
-- View tasks with numbering and status (✔ / ❌)
+- Add tasks with priority, status, and timestamp
+- View tasks with numbering, priority icon, and status (✔ / ❌)
 - Delete tasks by number
+- Mark tasks as done
 - Save tasks using JSON (persistent storage)
 - Load tasks automatically on startup
 - Handles old data format safely
@@ -52,6 +66,7 @@ Concepts used:
 - File handling (JSON)
 - Datetime module
 - Exception handling
+- dict.get() for safe key access
 """
 
 from datetime import datetime # Import datetime class to handle and format task creation timestamps
