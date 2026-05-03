@@ -185,10 +185,12 @@ def delete_task():
 
 def mark_done():
     """Let user mark a task as completed."""
+    if len(tasks) == 0:
+        print("No tasks to mark done")
+        return
     view_tasks()
 
-    if len(tasks) == 0:
-        return
+    
 
     try:
         index = int(input("Enter task number to mark done: ")) - 1
